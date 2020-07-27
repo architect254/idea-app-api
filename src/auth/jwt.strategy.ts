@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { User } from 'src/api/user/user.entity';
+import { User } from 'src/api/users/user.entity';
 import { JwtPayload } from './jwt.payload';
 
 import * as config from 'config';

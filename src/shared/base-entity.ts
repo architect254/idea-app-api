@@ -6,12 +6,12 @@ import {
   ManyToOne,
   Column,
 } from 'typeorm';
-
-import { User } from '../api/user/user.entity';
+import { Exclude } from 'class-transformer';
+import { User } from 'src/api/users/user.entity';
 
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: string;
 
   @CreateDateColumn()
   dateCreated?: Date;
@@ -19,6 +19,7 @@ export abstract class BaseEntity {
   @UpdateDateColumn()
   dateUpdated?: Date;
 
+  @Exclude()
   @ManyToOne(() => User, { nullable: true })
   @JoinColumn()
   createdBy: User;
@@ -26,6 +27,7 @@ export abstract class BaseEntity {
   @Column({ nullable: true })
   createdById: string;
 
+  @Exclude()
   @ManyToOne(() => User, { nullable: true })
   @JoinColumn()
   updatedBy: User;

@@ -11,7 +11,7 @@ import { SignUpCredentialsDto } from './dtos/sign-up.dto';
 import { SignInCredentialsDto } from './dtos/sign-in.dto';
 
 import { AuthService } from './auth.service';
-import { User } from '../api/user/user.entity';
+import { User } from 'src/api/users/user.entity';
 
 @Controller('auth')
 export class AuthController {

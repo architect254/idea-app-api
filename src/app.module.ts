@@ -6,14 +6,21 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './api/user/user.module';
 import { typeOrmConfig } from './config/typeorm.config';
+
+import { UserModule } from './api/users/user.module';
+import { IdeasModule } from './api/ideas/ideas.module';
 
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), AuthModule, UserModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    AuthModule,
+    UserModule,
+    IdeasModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 
-import { User } from '../api/user/user.entity';
+import { User } from 'src/api/users/user.entity';
 import { SignUpCredentialsDto } from './dtos/sign-up.dto';
 import { SignInCredentialsDto } from './dtos/sign-in.dto';
 import { InjectRepository } from '@nestjs/typeorm';

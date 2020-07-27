@@ -17,8 +17,8 @@ export class UserService {
     private userRepo: Repository<User>,
   ) {}
 
-  async create(credentials: UserDto, createdById): Promise<User> {
-    const { username, password, email, dob, firstname, surname } = credentials;
+  async create(payload: UserDto, createdById): Promise<User> {
+    const { username, password, email, dob, firstname, surname } = payload;
     const createdBy: User = await this.read(createdById);
     const user = new User();
 
@@ -33,22 +33,6 @@ export class UserService {
     await user.hashPassword(password);
 
     return await this.save(user);
-  }
-
-  async read(id): Promise<User> {
-    const user = await this.userRepo
-      .createQueryBuilder('user')
-      .where('user.id =:id', { id })
-      .leftJoinAndSelect('user.createdBy', 'createdBy')
-      .leftJoinAndSelect('user.updatedBy', 'updatedBy')
-      .getOne();
-
-    if (!user || !Object.keys(user).length) {
-      const errorMessage = `user:${id} not found`;
-      throw new NotFoundException(errorMessage);
-    }
-
-    return user;
   }
 
   async readAll(page: number, pageSize: number): Promise<User[]> {
@@ -85,6 +69,23 @@ export class UserService {
     }
 
     return id;
+  }
+
+  async read(id): Promise<User> {
+    const user = await this.userRepo
+      .createQueryBuilder('user')
+      .where('user.id =:id', { id })
+      .leftJoinAndSelect('user.createdBy', 'createdBy')
+      .leftJoinAndSelect('user.updatedBy', 'updatedBy')
+      .leftJoinAndSelect('user.bookmarks', 'bookmarks')
+      .getOne();
+
+    if (!user || !Object.keys(user).length) {
+      const errorMessage = `user:${id} not found`;
+      throw new NotFoundException(errorMessage);
+    }
+
+    return user;
   }
 
   async save(user: User): Promise<User> {

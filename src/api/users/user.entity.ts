@@ -1,16 +1,14 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 
 import { BaseEntity } from 'src/shared/base-entity';
 import { encryptionService } from '../../auth/encryption.service';
+import { Idea } from '../ideas/idea.entity';
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id?: number;
-
   @Column({ unique: true })
   username: string;
 
@@ -33,6 +31,10 @@ export class User extends BaseEntity {
   @Exclude()
   @Column()
   salt?: string;
+
+  @ManyToMany(() => Idea)
+  @JoinTable()
+  bookmarks: Idea[];
 
   public encrypt() {
     return encryptionService.genSalt().then(salt => {
