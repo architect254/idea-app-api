@@ -13,6 +13,7 @@ import { IdeasModule } from './api/ideas/ideas.module';
 
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
+import { CommentsModule } from './api/comments/comments.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
     AuthModule,
     UserModule,
     IdeasModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [

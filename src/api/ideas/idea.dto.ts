@@ -1,11 +1,6 @@
-import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class IdeaDto {
-  @IsOptional()
-  @IsNotEmpty()
-  @IsString()
-  id?: string;
-
   @IsNotEmpty()
   @IsString()
   title: string;

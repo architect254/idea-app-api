@@ -86,7 +86,9 @@ export class IdeasService {
     try {
       await this.ideaRepo.update(id, { title, description, author, updatedBy });
       return await this.read(id);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 
   async drop(id): Promise<any> {
