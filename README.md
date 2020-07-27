@@ -26,7 +26,7 @@
 
 ## Description
 
-a nest js api scaffold. complete with logging, http error handling, configuration [typeorm and project including AWS], authentication with jwt.
+idea app api with nest js. complete with logging, http error handling, configuration [typeorm and project including AWS], authentication with jwt.
 
 ## Installation
 
